@@ -42,8 +42,8 @@ class Command(BaseCommand):
                         <
                         (
                             12
-                            * date_part('year', age(created_at))
-                            + date_part('month', age(created_at))
+                            * date_part('year', age(created))
+                            + date_part('month', age(created))
                         )
                     LIMIT %s
                     """

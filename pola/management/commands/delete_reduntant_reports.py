@@ -21,7 +21,7 @@ class Command(BaseCommand):
 
             print("{} (id:{})".format(product['name'].encode('UTF-8') if product['name'] else '', product['id']))
 
-            reports = Report.objects.filter(product__id=product['id'], client='krs-bot').order_by('created_at')
+            reports = Report.objects.filter(product__id=product['id'], client='krs-bot').order_by('created')
 
             desc = set()
             for report in reports:
