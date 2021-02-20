@@ -57,6 +57,7 @@ LOCAL_APPS = (
     'pola.concurency',
     'pola.rpc_api',
     'pola.webviews',
+    'pola.bi',
     # custom users app
     # Your stuff: custom apps go here
 )
