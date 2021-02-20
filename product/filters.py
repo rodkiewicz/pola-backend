@@ -38,4 +38,8 @@ class ProductFilter(CrispyFilterMixin, django_filters.FilterSet):
             ('-name', _('Nazawa (Z-A)')),
             ('query_count', _('Liczba zeskanowań (rosnąco)')),
             ('-query_count', _('Liczba zeskanowań (malejąco)')),
+            ('modified', _('Data modyfikacji (rosnąco)')),
+            ('-modified', _('Data modyfikacji (malejaco)')),
+            ('created', _('Data utworzenia (rosnąco)')),
+            ('-created', _('Data utworzenia (malejaco)')),
         )

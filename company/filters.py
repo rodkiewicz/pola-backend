@@ -31,6 +31,10 @@ class CompanyFilter(CrispyFilterMixin, django_filters.FilterSet):
             ('-name', _('Nazwa (Z-A)')),
             ('query_count', _('Liczba zapytań (rosnąco)')),
             ('-query_count', _('Liczba zapytań (malejąco)')),
+            ('modified', _('Data modyfikacji (rosnąco)')),
+            ('-modified', _('Data modyfikacji (malejaco)')),
+            ('created', _('Data utworzenia (rosnąco)')),
+            ('-created', _('Data utworzenia (malejaco)')),
         )
 
 
