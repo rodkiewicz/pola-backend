@@ -24,8 +24,22 @@ class StatusFilter(django_filters.ChoiceFilter):
         return qs
 
 
+class BotFilter(django_filters.BooleanFilter):
+    def __init__(self, *args, **kwargs):
+        if 'label' not in kwargs:
+            kwargs['label'] = _('Czy schować zgłoszenia od bota?')
+        super().__init__(*args, **kwargs)
+
+    def filter(self, qs, value):
+        if value:
+            return qs.only_created_by_users()
+        else:
+            return qs
+
+
 class ReportFilter(CrispyFilterMixin, django_filters.FilterSet):
     status = StatusFilter()
+    bot = BotFilter()
     product = django_filters.ModelChoiceFilter(
         queryset=Product.objects.all(), widget=autocomplete.ModelSelect2(url='product:product-autocomplete')
     )

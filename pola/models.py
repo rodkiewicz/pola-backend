@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 
 from django.contrib.postgres.indexes import BrinIndex
 from django.db import models
+from django.db.models import Q
 from django.utils import timezone
 from django.utils.timezone import get_default_timezone
 
@@ -37,7 +38,8 @@ class Stats(models.Model):
     no_of_not_verified_not_590 = models.IntegerField(default=0)
     no_of_new_companies = models.IntegerField()
     no_of_new_products = models.IntegerField()
-    no_of_new_reports = models.IntegerField()
+    no_of_new_reports_reported_by_users = models.IntegerField(default=0)
+    no_of_new_reports_reported_by_bot = models.IntegerField(default=0)
 
     def get_date(self):
         return '%d %s' % (
@@ -92,8 +94,15 @@ class Stats(models.Model):
             .distinct('id')
             .count()
         )
-        self.no_of_new_reports = (
+        self.no_of_new_reports_reported_by_users = (
             Report.objects.filter(created_at__gte=today_midnight, created_at__lt=tomorrow_midnight)
+            .filter(~Q(client='krs-bot'))
+            .order_by('id')
+            .distinct('id')
+            .count()
+        )
+        self.no_of_new_reports_reported_by_bot = (
+            Report.objects.filter(created_at__gte=today_midnight, created_at__lt=tomorrow_midnight, client='krs-bot')
             .order_by('id')
             .distinct('id')
             .count()

@@ -111,10 +111,11 @@ function drawResponses(){
       data.addColumn('string', '');
       data.addColumn('number', 'Nowo zeskanowani producenci');
       data.addColumn('number', 'Nowo zeskanowane produkty');
-      data.addColumn('number', 'Nowo zgłoszenia');
+      data.addColumn('number', 'Nowe zgłoszenia od użytkowników');
+      data.addColumn('number', 'Nowe zgłoszenia od bota');
       data.addRows([
         {% for stat in  stats %}
-            ["{{ stat.get_date}}",{{ stat.no_of_new_companies}},{{ stat.no_of_new_products}},{{ stat.no_of_new_reports}}],
+            ["{{ stat.get_date}}",{{ stat.no_of_new_companies}},{{ stat.no_of_new_products}},{{ stat.no_of_new_reports_reported_by_users}},{{ stat.no_of_new_reports_reported_by_bot}}],
         {% endfor %}
       ]);
       var options = {

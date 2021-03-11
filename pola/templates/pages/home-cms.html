@@ -153,13 +153,13 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         {% trans "Najnowsze nierozpatrzone zgłoszenia" %}
-                        (
-                        <abbr title="{% trans "Liczba otwartych raportów" %}">{{ no_of_open_reports }}</abbr>
-                        +
-                        <abbr title="{% trans "Liczba zamkniętych raportów" %}">{{ no_of_resolved_reports }}</abbr>
-                        =
-                        <abbr title="{% trans "Liczba wszystkich raportów" %}">{{ no_of_reports }}</abbr>
-                        )
+                            (
+                            <abbr title="{% trans "Liczba otwartych raportów przez użytkowników" %}"><b>{{ no_of_open_user_reports }}</b></abbr>
+                            +
+                            <abbr class="text-warning" title="{% trans "Liczba otwartych raportów przez bota" %}">{{ no_of_open_bot_reports }}</abbr>
+                            =
+                            <abbr title="{% trans "Liczba wszystkich raportów" %}">{{ no_of_open_reports }}</abbr>
+                            )
                     </h3>
                 </div>
                 {% for report in  newest_reports %}

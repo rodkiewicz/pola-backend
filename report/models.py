@@ -5,6 +5,7 @@ from babel.dates import format_timedelta
 from django.conf import settings
 from django.contrib.postgres.indexes import BrinIndex
 from django.db import models
+from django.db.models import Q
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
@@ -21,6 +22,9 @@ class ReportQuerySet(models.QuerySet):
 
     def only_resolved(self):
         return self.filter(resolved_at__isnull=False).filter(resolved_by__isnull=False)
+
+    def only_created_by_users(self):
+        return self.filter(~Q(client='krs-bot'))
 
     def resolve(self, user):
         return self.update(resolved_at=timezone.now(), resolved_by=user)
